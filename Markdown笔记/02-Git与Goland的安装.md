@@ -77,10 +77,58 @@ Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitH
 2. 第二种,进入一个目录,打开Git Bash,(我们拉取下来的项目会保存在这个目录下)
 
    ```cmd
+   #因为我们国内墙的原因,建议使用 ssl通信方式进行代码的拉取
+   $git clone git@github.com:zhouzhijie3607154/ReviewGoLang.git
+# 查看我们本地当前的所有分支,如果远程分支有自己之前创建的分支,建议还是用之前的分支名
+   $git branch -a
+   # 切换到自己的本地分支进行开发
+   $git checkout -b yugu
+   #开发了一段时间后,我需要提交新写的代码了,则先提交本地代码，然后拉取远程main分支的最新代码
+   $git commit -m "提交说明"
+   $git pull --rebase origin main
+   #将main分支最新的代码合并到我们的本地分支yugu中,有冲突的话需要手动排除一下
+   $git merge main
+   #提交我们的本地分支yugu到远程仓库中
+   $git push origin yugu
+   #去远程仓库再发送一个分支的合并请求给你的leader,剩下的交给他就行了
+   
+   #假设你是leader,则需要在远程仓库中对代码进行审核,检查分支提交上来的代码是否符合编码规范,有无冲突,有些没写注释的地方让他先给你补个注释或者文档,再确认合并提交的分支.
    
    ```
-
+   
    
 
-​	
+#### Git的常用命令
+
+```
+$git clone 克隆存储库到新目录 
+$git init  创建一个空的Git存储库或重新初始化一个现有的存储库
+$git add 将工作区的文件内容添加到索引中
+$git mv 移动或重命名文件、目录或符号链接
+$git restore 恢复工作树文件
+$git rm 从工作树和索引中删除文件
+$git diff 显示提交、提交和工作树之间的变化
+$git log 显示提交日志
+$git show 显示各种类型的对象
+$git status 显示工作树状态
+$git branch 列出、创建或删除分支
+$git checkout 切换到新分支
+$git commit 记录对存储库的更改
+$git merge 将两个或多个开发历史连接在一起
+$git rebase 在另一个基本提示上重新应用提交
+$git reset 将当前HEAD复位到指定状态
+$git switch 交换分支
+$git tag 创建、列出、删除或验证用GPG签名的标记对象
+$git fetch 从另一个存储库下载对象和引用
+$git pull 从另一个存储库或本地分支中提取并与之集成
+$git push 更新远程引用和相关对象
+```
+
+##### 选择  merge 还是 rebase ?
+
+merge 是 合并,融合的意思，rebase 是 复位基底。在git中使用 merge 会将两个不同的分支内容合并为一个新的节点，之前的提交分开显示，也就是说git的历史工作提交树会产生分叉，在代码review时，需要进行三方节点的对比。而rebase进行合并则不会生成新节点，而是使工作树呈线性的方式笔直的前进，这样可以得到更好的提交树。
+
+在多人协作开发，提交代码遇到版本冲突时，使用merge操作只要解决冲突内容，add 修改内容，commit就可以了。而使用rebase在遇到冲突时会中断合并操作，同时会提示去解决冲突。解决冲突后，add 修改 后需要执行git rebase –continue 继续合并操作，或者 执行 git rebase –skip 忽视已解决的这个冲突。
+
+我个人更喜欢使用
 
