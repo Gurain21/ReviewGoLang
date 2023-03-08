@@ -61,7 +61,26 @@ Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitH
 
 先讲第一种怎么操作,首先Git Bash进入当前项目目录
 
-1. git init 
+1. ```cmd
+   # 初始化本地仓库
+   $git init 
+   # 添加项目中的所有文件到暂存区
+   $git add .
+   # 将暂存区的文件进行提交, -m 是提交的注释信息,对本次提交进行说明
+   $git commit -m "The First Commit"
+   # 由于是第一次提交,无需对远程仓库进行pull拉去再进行分支合并,这里我们新建本地分支yugu
+   $git checkout -b yugu
+   # 将新建的yugu分支推送到远程代码仓库中去
+   $git push origin yugu
+   ```
+
+2. 第二种,进入一个目录,打开Git Bash,(我们拉取下来的项目会保存在这个目录下)
+
+   ```cmd
+   
+   ```
+
+   
 
 ​	
 
