@@ -16,7 +16,12 @@ import (
 		简短变量定义写法：
 			变量名 := 值
 		多变量同时定义写法：
-
+			var (
+				a, b byte
+				c =10
+				d rune
+				e    error
+				)
 
 
 常量 （constant） 程序运行过程中恒定不变的量，声明时就必须为其赋值。
@@ -41,7 +46,8 @@ func main() {
 	
 	var (
 		a, b byte
-		c, d rune
+		c    = 10
+		d    rune
 		e    error
 	)
 	a, b, c, d = 'a', 'b', 'c', 'd'
@@ -51,5 +57,12 @@ func main() {
 	//const 常量名 数据类型 = 值
 	//可以看到常量和变量的对比，常量定义后是可以不用的，编译器也不会报错。
 	const π = 3.14
+	
+	const (
+		x = iota
+		y = 10
+		z = iota
+	)
+	fmt.Println(x, y, z) //0 10 2
 	
 }
